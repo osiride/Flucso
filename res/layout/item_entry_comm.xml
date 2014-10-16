@@ -75,6 +75,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/empty_text"
-        android:src="@drawable/btn_popup" />
+        android:src="@drawable/ic_menu_moreoverflow_mtrl" />
 
 </LinearLayout>
