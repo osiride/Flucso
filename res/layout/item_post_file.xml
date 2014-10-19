@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:contentDescription="@string/empty_text"
-        android:src="@drawable/abc_ic_clear_normal" />
+        android:src="@drawable/abc_ic_clear_mtrl_alpha" />
 
 </RelativeLayout>
