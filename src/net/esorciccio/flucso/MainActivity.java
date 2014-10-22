@@ -18,6 +18,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
@@ -60,6 +61,11 @@ public class MainActivity extends BaseActivity implements OnFFReqsListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+		
 		lastFeed = session.getPrefs().getString(PK.STARTUP, "home");
 		lastFeed = savedInstanceState != null ? savedInstanceState.getString("lastFeed", lastFeed) : lastFeed;
 		
@@ -79,12 +85,12 @@ public class MainActivity extends BaseActivity implements OnFFReqsListener {
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open) {
 			@Override
 			public void onDrawerClosed(View view) {
-				getActionBar().setTitle(mTitle);
+				getSupportActionBar().setTitle(mTitle);
 				invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 			}
 			@Override
 			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(mDrawerTitle);
+				getSupportActionBar().setTitle(mDrawerTitle);
 				invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 			}
 		};
@@ -96,8 +102,8 @@ public class MainActivity extends BaseActivity implements OnFFReqsListener {
 		mUserName = (TextView) findViewById(R.id.user_name);
 		mUserLogin = (TextView) findViewById(R.id.user_login);
 		
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 		
 		// Commons.picasso(getApplicationContext()).setIndicatorsEnabled(true);
 		
@@ -157,7 +163,7 @@ public class MainActivity extends BaseActivity implements OnFFReqsListener {
 	@Override
 	public void setTitle(CharSequence title) {
 		mTitle = title;
-		getActionBar().setTitle(mTitle);
+		getSupportActionBar().setTitle(mTitle);
 	}
 	
 	@Override

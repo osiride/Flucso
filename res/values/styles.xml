@@ -10,6 +10,23 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+
+        <!-- action bar background -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+
+        <!-- status bar, contextual app bars -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- theme UI controls like checkboxes and text fields -->
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--
+         You can also set colorControlNormal, colorControlActivated
+         colorControlHighlight & colorSwitchThumbNormal.
+        -->
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <!-- Application theme. -->

@@ -1,6 +1,5 @@
 package net.esorciccio.flucso;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,11 +7,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Window;
+//import android.view.Window;
 import android.widget.Toast;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends ActionBarActivity {
 	
 	private BroadcastReceiver receiver;
 	private ProgressDialog progress;
@@ -22,7 +22,7 @@ public abstract class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		//requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		
 		Log.v(logTag(), "onCreate");
 		

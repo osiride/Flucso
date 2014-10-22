@@ -8,5 +8,10 @@
     <color name="entry_bg_update">#EFFBFB</color>
     <color name="post_bg_nonpriv">#EEEEEE</color>
     <color name="post_bg_private">#F8E0E0</color>
+    
+    <!-- Material -->
+    <color name="colorPrimary">#5677fc</color>
+    <color name="colorPrimaryDark">#455ede</color>
+    <color name="colorAccent">#ffd600</color>
 
 </resources>
