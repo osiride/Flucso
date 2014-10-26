@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity implements OnFFReqsListener {
 		mDrawerList.setAdapter(adapter);
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open) {
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 			@Override
 			public void onDrawerClosed(View view) {
 				getSupportActionBar().setTitle(mTitle);
