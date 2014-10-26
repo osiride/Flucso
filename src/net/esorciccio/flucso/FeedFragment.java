@@ -501,7 +501,7 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 		public void run() {
 			final Activity context = getActivity();
 			try {
-				srl.setRefreshing(true);
+				srl.setRefreshing(false); // (originally set to true) TODO: progress bars on Toolbar are not supported in appcompat v21. Add one to the Toolbar manually?
 				Log.v(logTag(), "(loader) fetching " + Integer.toString(amount) + " items...");
 				// According to API documentation, when cursor="" we should get all the entries, but we don't. FF
 				// returns an empty feed (with the cursor we'll use for the next call), so we have to make a call
@@ -632,7 +632,7 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 		private String error = null;
         @Override
         protected void onPreExecute() {
-        	srl.setRefreshing(true);
+        	srl.setRefreshing(false); // (originally set to true) TODO: progress bars on Toolbar are not supported in appcompat v21. Add one to the Toolbar manually?
         	Log.v(logTag(), "fetching more items starting from " + Integer.toString(amount + 1) + "...");
         }
 		@Override
