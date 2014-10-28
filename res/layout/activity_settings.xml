@@ -3,5 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
+    
+    <LinearLayout
+    android:id="@+id/content_view"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        
+    <include layout="@layout/toolbar" />
+        
+    </LinearLayout>
 
 </RelativeLayout>
+
