@@ -4,6 +4,7 @@ import net.esorciccio.flucso.FFAPI.FeedList.SectionItem;
 import net.esorciccio.flucso.SubscrAllAdapter.Scope;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -52,6 +53,11 @@ public class SearchActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
+		
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
 		
 		feeds = new SubscrAllAdapter(this);
 		
