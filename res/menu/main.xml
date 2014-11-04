@@ -31,11 +31,11 @@
     <item
         android:id="@+id/action_search"
         android:title="@string/action_search"
-        android:icon="@drawable/menu_search"
+        android:icon="@drawable/ic_action_action_search"
         android:menuCategory="system"
         android:orderInCategory="1"
-        android:showAsAction="never"
-        app:showAsAction="never"/>
+        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
