@@ -1,3 +1,7 @@
+/*
+ * © 2014 Faiz Malkani
+ * https://github.com/FaizMalkani/FloatingActionButton
+ */
 package  net.esorciccio.flucso;
 
 import android.animation.AnimatorSet;
