@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,6 +67,13 @@ public class MainActivity extends BaseActivity implements OnFFReqsListener {
 		if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
+		
+		FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
+        .withDrawable(getResources().getDrawable(R.drawable.fab_new))
+        .withButtonColor(Color.parseColor("#40C4FF"))
+        .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
+        .withMargins(0, 0, 16, 16)
+        .create();
 		
 		lastFeed = session.getPrefs().getString(PK.STARTUP, "home");
 		lastFeed = savedInstanceState != null ? savedInstanceState.getString("lastFeed", lastFeed) : lastFeed;

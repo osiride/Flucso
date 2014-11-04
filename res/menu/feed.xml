@@ -9,8 +9,8 @@
         android:icon="@drawable/menu_post"
         android:menuCategory="container"
         android:orderInCategory="10"
-        android:showAsAction="always"
-        app:showAsAction="always"/>
+        android:showAsAction="never"
+        app:showAsAction="never"/>
     
     <item
         android:id="@+id/action_feed_auto"
@@ -36,5 +36,6 @@
         android:orderInCategory="95"
         android:showAsAction="never"
         app:showAsAction="never"/>
+    
 
 </menu>
