@@ -97,6 +97,9 @@ public class FFAPI {
 		@GET("/feedinfo/{feed_id}")
 		FeedInfo get_profile_sync(@Path("feed_id") String feed_id);
 		
+		@GET("/feedlist")
+		FeedList get_navigation_sync();
+		
 		@GET("/feed/{feed_id}")
 		Feed get_feed_normal(@EncodedPath("feed_id") String feed_id, @Query("start") int start, @Query("num") int num);
 		
@@ -222,6 +225,7 @@ public class FFAPI {
 		}
 		
 		public int update(Feed feed) {
+			realtime = feed.realtime;
 			timestamp = feed.timestamp;
 			int res = 0;
 			for (Entry e : feed.entries)
@@ -500,14 +504,21 @@ public class FFAPI {
 			}
 			
 			public String getFirstImage() {
-				if (TextUtils.isEmpty(rawBody))
-					return null;
-				String[] chk = rawBody.split("\\s+");
-				for (String s : chk) {
-					s = s.toLowerCase(Locale.getDefault());
-					if (Patterns.WEB_URL.matcher(s).matches() && (s.indexOf("/m.friendfeed-media.com/") > 0 ||
-						(s.endsWith(".jpg") || s.endsWith(".jpeg") || s.endsWith(".png") || s.endsWith(".gif"))))
-						return s;
+				String res = findImageLink(rawBody);
+				if (res == null)
+					res = findImageLink(body);
+				return res;
+			}
+			
+			private static String findImageLink(String text) {
+				if (!TextUtils.isEmpty(text)) {
+					String[] chk = text.split("\\s+");
+					for (String s : chk) {
+						s = s.toLowerCase(Locale.getDefault());
+						if (Patterns.WEB_URL.matcher(s).matches() && (s.indexOf("/m.friendfeed-media.com/") > 0 ||
+							(s.endsWith(".jpg") || s.endsWith(".jpeg") || s.endsWith(".png") || s.endsWith(".gif"))))
+							return s;
+					}
 				}
 				return null;
 			}
@@ -544,6 +555,7 @@ public class FFAPI {
 			int width = 0;
 			int height = 0;
 			String player = "";
+			int rotation = 0; // local
 		}
 		
 		static class Attachment {

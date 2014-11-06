@@ -1,6 +1,7 @@
 package net.esorciccio.flucso;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,6 +17,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -70,6 +73,7 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 	private MenuItem miAutoU;
 	private MenuItem miPause;
 	private MenuItem miSubsc;
+	private MenuItem miHideF;
 
 	public String fid;
 	public String fname;
@@ -96,6 +100,13 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 		setHasOptionsMenu(true);
 		
 		adapter = new FeedAdapter(getActivity(), this);
+		adapter.registerDataSetObserver(new DataSetObserver() {
+			@Override
+			public void onChanged() {
+				if (fquery == "")
+					session.cachedFeed = adapter.feed;
+			}
+		});
 		
 		Bundle args = getArguments();
 		fid = args.getString("id");
@@ -149,7 +160,17 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 		lvFeed.setOnScrollListener(new OnScrollListener() {
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				// nothing to do.
+				switch (scrollState) {
+					case OnScrollListener.SCROLL_STATE_IDLE:
+						imgGoUp.setAlpha((float) 1.0);
+						break;
+					case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+						imgGoUp.setAlpha((float) 0.5);
+						break;
+					case OnScrollListener.SCROLL_STATE_FLING:
+						imgGoUp.setAlpha((float) 0.2);
+						break;
+				}
 			}
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -222,6 +243,7 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 		miAutoU = menu.findItem(R.id.action_feed_auto);
 		miPause = menu.findItem(R.id.action_feed_pause);
 		miSubsc = menu.findItem(R.id.action_feed_subscr);
+		miHideF = menu.findItem(R.id.action_feed_filter);
 	}
 	
 	@Override
@@ -265,6 +287,18 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 				public void onBitmapFailed(Drawable arg0) {
 				}
 			});
+			return true;
+		}
+		if (item == miHideF) {
+			pauseUpdates(false);
+			String flt = session.getPrefs().getString(PK.FEED_HBF, "").toLowerCase(Locale.getDefault());
+			if (!flt.contains(adapter.feed.id)) {
+				flt += (flt != "" ? ", " : "") + adapter.feed.id;
+				SharedPreferences.Editor editor = session.getPrefs().edit();
+				editor.putString(PK.FEED_HBF, flt);
+				editor.commit();
+			}
+			getActivity().getFragmentManager().popBackStack();
 			return true;
 		}
 		Toast.makeText(getActivity(), item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -329,13 +363,18 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 	
 	@Override
 	protected void initFragment() {
+		if (adapter != null && session.cachedFeed != null && session.cachedFeed.isIt(fid)) {
+			adapter.feed = session.cachedFeed;
+			adapter.notifyDataSetChanged();
+			cursor = adapter.feed.realtime.cursor;
+		}
 		if (adapter != null && adapter.feed != null)
 			adapter.feed.setLocalHide();
 		resumeUpdates(false, false);
 	}
 	
 	private void checkMenu() {
-		if (miWrite == null || miAutoU == null || miPause == null || miSubsc == null)
+		if (miWrite == null || miAutoU == null || miPause == null || miSubsc == null || miHideF == null)
 			return;
 		boolean fl = adapter != null && adapter.feed != null;
 		miWrite.setVisible(fl);
@@ -343,6 +382,7 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 		miAutoU.setVisible(fl && !isAutoUpdGoing());
 		miPause.setVisible(fl && !miAutoU.isVisible());
 		miSubsc.setVisible(fl && adapter.feed.canSetSubscriptions());
+		miHideF.setVisible(fl && (adapter.feed.isGroup() || adapter.feed.isUser()));
 	}
 	
 	private boolean isAutoUpdSet() {
@@ -583,7 +623,7 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 				return;
 			}
 			try {
-				Log.v(logTag(), "fetching " + Integer.toString(amount) + " items...");
+				Log.v(logTag(), "(updater) fetching " + Integer.toString(amount) + " items...");
 				final Feed updates;
 				if (TextUtils.isEmpty(fquery))
 					updates = FFAPI.client_feed(session).get_feed_updates(fid, amount, cursor, 0, 1);
@@ -633,7 +673,7 @@ public class FeedFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         @Override
         protected void onPreExecute() {
         	srl.setRefreshing(false); // (originally set to true) TODO: progress bars on Toolbar are not supported in appcompat v21. Add one to the Toolbar manually?
-        	Log.v(logTag(), "fetching more items starting from " + Integer.toString(amount + 1) + "...");
+        	Log.v(logTag(), "(extender) fetching more items starting from " + Integer.toString(amount + 1) + "...");
         }
 		@Override
 		protected Feed doInBackground(Void... params) {

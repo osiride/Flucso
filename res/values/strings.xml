@@ -55,7 +55,7 @@
     <string name="action_feed_autoups">Auto updates</string>
     <string name="action_feed_stopups">Pause updates</string>
     <string name="action_feed_subscr">Set subscription</string>
-    <string name="action_feed_admin">Admin</string>
+    <string name="action_feed_filter">Hide all posts from this feed</string>
     <string name="action_feed_scrollup">New posts available! (tap to go up)</string>
     <string name="action_entry_speedc">Instant comment</string>
     <string name="action_entry_summ">Gimme a summary</string>
@@ -69,6 +69,9 @@
     <string name="action_entry_web">Open in browser</string>
     <string name="action_gall_prior">Previous</string>
     <string name="action_gall_next">Next</string>
+    <string name="action_gall_rotl">Rotate left</string>
+    <string name="action_gall_rotr">Rotate right</string>
+    <string name="action_gall_rot0">Restore original</string>
     <string name="action_comm_edit">Edit comment</string>
     <string name="action_comm_delete">Delete comment</string>
     <string name="entry_tab_dests">To</string>
@@ -160,6 +163,7 @@
     <string name="yourname">You</string>
     <string name="yourfeed">Your feed</string>
     <string name="empty_text"></string>
+    <string name="source_prefix">from</string>
     <string name="warning_dm">This is a direct message right now.</string>
     <string name="comms_summary">Basically they are saying:</string>
     <string name="dlg_btn_ok">OK</string>

@@ -55,7 +55,7 @@
     <string name="action_feed_autoups">Aggiornamento automatico</string>
     <string name="action_feed_stopups">Pausa aggiornamento</string>
     <string name="action_feed_subscr">Imposta sottoscrizione</string>
-    <string name="action_feed_admin">Amministra</string>
+    <string name="action_feed_filter">Nascondi i post di questo feed</string>
     <string name="action_feed_scrollup">Nuovi posts disponibili!</string>
     <string name="action_entry_speedc">Commenti rapidi</string>
     <string name="action_entry_summ">Fammi un riassunto</string>
@@ -69,6 +69,9 @@
     <string name="action_entry_web">Apri nel browser</string>
     <string name="action_gall_prior">Precedente</string>
     <string name="action_gall_next">Successivo</string>
+    <string name="action_gall_rotl">Ruota a sinistra</string>
+    <string name="action_gall_rotr">Ruota a destra</string>
+    <string name="action_gall_rot0">Ripristina verso</string>
     <string name="action_comm_edit">Modifica commento</string>
     <string name="action_comm_delete">Elimina commento</string>
     <string name="entry_tab_dests">A</string>
@@ -160,6 +163,7 @@
     <string name="yourname">Tu</string>
     <string name="yourfeed">Il tuo feed</string>
     <string name="empty_text"></string>
+    <string name="source_prefix">da</string>
     <string name="warning_dm">Ora questo è un messaggio diretto.</string>
     <string name="comms_summary">Stanno dicendo, in sostanza:</string>
     <string name="dlg_btn_ok">OK</string>

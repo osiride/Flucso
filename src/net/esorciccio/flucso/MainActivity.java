@@ -75,8 +75,12 @@ public class MainActivity extends BaseActivity implements OnFFReqsListener {
         .withMargins(0, 0, 16, 16)
         .create();
 		
-		lastFeed = session.getPrefs().getString(PK.STARTUP, "home");
-		lastFeed = savedInstanceState != null ? savedInstanceState.getString("lastFeed", lastFeed) : lastFeed;
+		if (session.cachedFeed != null)
+			lastFeed = session.cachedFeed.id;
+		else {
+			lastFeed = session.getPrefs().getString(PK.STARTUP, "home");
+			lastFeed = savedInstanceState != null ? savedInstanceState.getString("lastFeed", lastFeed) : lastFeed;
+		}
 		
 		adapter = new DrawerAdapter(this);
 		

@@ -44,18 +44,23 @@
 
         <TextView
             android:id="@+id/txt_entry_time"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-1dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/test_time_1"
             android:textColor="@android:color/darker_gray" />
+
     </LinearLayout>
 
     <ImageView
         android:id="@+id/img_entry_dm"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="-3dp"
+        android:layout_marginTop="-6dp"
         android:contentDescription="@string/empty_text"
         android:src="@drawable/entry_dm" />
 
