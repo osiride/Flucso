@@ -36,6 +36,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
                 android:contentDescription="@string/empty_text"
                 android:src="@drawable/nomugshot" />
 
@@ -55,7 +56,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="2dp"
+                        android:layout_marginRight="2dp"
                         android:drawableStart="@drawable/entry_private"
+                        android:drawableLeft="@drawable/entry_private"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="@string/test_username"
@@ -68,6 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableStart="@drawable/entry_to"
+                        android:drawableLeft="@drawable/entry_to"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="@string/test_to_line"

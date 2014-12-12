@@ -26,6 +26,7 @@
 	            android:layout_height="wrap_content"
 	            android:layout_marginBottom="8dp"
 	            android:drawableStart="@drawable/ic_action_web_site"
+	            android:drawableLeft="@drawable/ic_action_web_site"
 	            android:drawablePadding="4dp"
 	            android:ellipsize="end"
 	            android:ems="10"
